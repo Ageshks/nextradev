@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BroYouNeed | Mobile & Web Development Company</title>
+  <meta name="description" content="BroYouNeed - Mobile App & Website Development Company">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ✅ GSAP -->
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/Flip.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<header class="cinema-navbar">
+    <div class="cinema-left">NXD</div>
+  
+    <!-- ✅ DESKTOP NAV -->
+    <div class="cinema-center">
+      <a href="#home" class="cinema-btn outline">HOME</a>
+      <a href="#services" class="cinema-btn outline">SERVICES</a>
+      <a href="#contact" class="cinema-btn outline">CONTACT</a>
+      <a href="#" class="cinema-btn fill">BRO YOU Need →</a>
+    </div>
+  
+    <div class="cinema-right">LOGIN</div>
+  
+    <!-- ✅ HAMBURGER (MOBILE ONLY) -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+  
+  <!-- ✅ MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home">HOME</a>
+    <a href="#services">SERVICES</a>
+    <a href="#contact">CONTACT</a>
+    <a href="#">BRO YOU Need</a>
+  </div>
+  
+
+<section class="mars-hero">
+
+    <!-- Top Label -->
+    <div class="mars-top">
+      <span class="mars-brand">NEXTRADEV</span>
+    </div>
+  
+    <!-- Main Title -->
+    <h1 class="mars-title glitch" data-text="NEXTRADEV">NEXTRADEV</h1>
+  
+    <!-- Subtitle -->
+    <p class="mars-sub">
+        WE CRAFT MODERN DIGITAL EXPERIENCES THAT MOVE BUSINESSES FORWARD.
+        MOBILE APPS, WEB PLATFORMS, AND INTELLIGENT SYSTEMS DESIGNED FOR SPEED,<br>
+        SCALABILITY, AND SEAMLESS USER EXPERIENCES.
+    </p>
+  
+    <!-- Scroll Hint -->
+  
+    <!-- Planet Image -->
+    <img src="mars-removebg-preview.png" class="mars-planet" alt="Mars">
+  
+ 
+  
+  </section>
+  <section class="mars-card">
+    <div>We Build Powerful Digital Products</div>
+  </section>
+  
+  
+
+<!-- ✅ HERO -->
+<section id="home" class="equipment-section">
+
+    <div class="equipment-left">
+      <span class="equipment-tag">[ CHAPTER ] TOOLS</span>
+  
+      <h1 class="equipment-title">
+        MISSION<br>
+        EQUIPMENT
+      </h1>
+  
+      <p class="equipment-desc">
+        Advanced digital solutions engineered for performance, scalability,
+        and real-world business impact across web and mobile platforms.
+      </p>
+    </div>
+  
+    <div class="equipment-right">
+      <div class="equipment-card">
+        <div>// INNOVATIVE //</div>
+        <div>// MIND //</div>
+      </div>
+    </div>
+  
+    <div class="equipment-tabs">
+      <span class="active">SOFTWARE DEVELOPMENT</span>
+      <span>MOBILE APPS</span>
+      <span>WEBSITES</span>
+      <span>DIGITAL MARKETING</span>
+    </div>
+  
+  </section>
+  
+<!-- <section id="home" class="hero hero-video">
+  
+
+    <div class="hero-overlay"></div>
+  
+    <div class="hero-content">
+      <h1>We Build Powerful Digital Products</h1>
+      <p>Mobile Apps • Websites • UI/UX • Business Solutions</p>
+      <a href="#contact" class="btn">Get Started</a>
+    </div>
+  
+  </section>
+   -->
+
+<!-- ✅ SERVICES -->
+<!-- <section id="services" class="services">
+  <h2>Our Services</h2>
+  <div class="service-grid">
+    <div class="card">Mobile App Development</div>
+    <div class="card">Website Development</div>
+    <div class="card">UI/UX Design</div>
+    <div class="card">API & Backend Integration</div>
+  </div>
+</section> -->
+
+<!-- ✅ ANIMATED BOX -->
+<section class="box-section">
+  <div class="animated-box"></div>
+</section>
+
+<!-- ✅ AUTO FLIP -->
+<section id="flip" class="flip-section">
+  <h2>Scroll Flip Animation</h2>
+  <div class="container">
+    <div class="square gradient-blue">1</div>
+    <div class="square gradient-pink">2</div>
+  </div>
+</section>
+
+<!-- ✅ CONTACT -->
+<section id="contact" class="contact">
+  <h2>Contact Us</h2>
+  <form onsubmit="sendMessage(event)">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2025 NEXTRADEV. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
