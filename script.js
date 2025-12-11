@@ -6,7 +6,7 @@ function sendMessage(event) {
   
   /* ✅ GSAP + ANIMATIONS INIT */
   window.addEventListener("load", () => {
-    gsap.registerPlugin(ScrollTrigger, Flip);
+    gsap.registerPlugin(ScrollTrigger, Flip, MotionPathPlugin);
   
     /* ✅ INFINITE ROTATION FOR MARS PLANET */
     gsap.to(".mars-planet", {
@@ -227,4 +227,52 @@ function detectCollisions() {
 }
 
 detectCollisions();
+
+/* ✅ MARS CARD — Circular Orbit Entry */
+gsap.from(".mars-card", {
+  duration: 2.6,
+  opacity: 0,
+  ease: "power3.out",
+  motionPath: {
+    path: [
+      { x: -350, y: -420 },  // start far upper-left
+      { x: -220, y: -260 },  // curve inward
+      { x: -120, y: -140 },  // smaller arc
+      { x: 0, y: 0 }         // final resting position (your CSS)
+    ],
+    curviness: 1.6,
+    autoRotate: false
+  }
+
+  
+});
+/* ✅ Mars Subtitle — Flip Animation Between Lines */
+const subTexts = document.querySelectorAll(".mars-sub-slider span");
+let subIndex = 0;
+
+function rotateSubText() {
+  subTexts.forEach(t => t.classList.remove("active"));
+
+  subTexts[subIndex].classList.add("active");
+
+  subIndex = (subIndex + 1) % subTexts.length;
+}
+
+rotateSubText(); 
+setInterval(rotateSubText, 3200); 
+/* Cinematic 3D flipping subtitle */
+const flips = document.querySelectorAll(".mars-sub-slider span");
+let index = 0;
+
+function flipText() {
+  flips.forEach(t => t.classList.remove("active"));
+  flips[index].classList.add("active");
+
+  index = (index + 1) % flips.length;
+}
+
+flipText(); // show first
+setInterval(flipText, 3200); // flip every 3.2s
+
+
   

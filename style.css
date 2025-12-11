@@ -876,4 +876,53 @@ footer {
     }
   }
   
+  .mars-sub-slider {
+    position: relative;
+    height: 55px;   /* bigger height for bigger text */
+    overflow: hidden;
+    font-size: 20px;   /* bigger text */
+    font-weight: 600;
+    line-height: 1.4;
+    margin-top: 40px;
+    margin-left: 25%;
+  }
+  
+  .mars-sub-slider {
+    position: relative;
+    height: 70px; /* more vertical space */
+    overflow: hidden;
+    margin-top: 40px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    perspective: 1000px; /* enables 3D depth */
+  }
+  
+  /* Each line */
+  .mars-sub-slider span {
+    position: absolute;
+    font-size: 24px;       /* Bigger text */
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+  
+    /* Premium gradient text */
+    background: linear-gradient(90deg, #ff512f, #f09819, #ffba59);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+    opacity: 0;
+    transform: rotateX(90deg) translateZ(40px); /* 3D depth */
+    transition:
+      opacity 0.8s ease,
+      transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  
+  /* Active visible line */
+  .mars-sub-slider span.active {
+    opacity: 1;
+    transform: rotateX(0deg) translateZ(0px);
+  }
   
