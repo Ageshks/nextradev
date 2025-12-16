@@ -18,6 +18,8 @@ section,
 .contact,
 footer {
   background: transparent !important;
+  background-color: transparent !important;
+  
 }
 
 
@@ -184,12 +186,16 @@ footer {
   
   /* ✅ MAIN TITLE */
   .mars-title {
-    font-size: clamp(80px, 18vw, 260px);
+    font-size: clamp(56px, 14vw, 220px);
     font-weight: 900;
-    letter-spacing: -8px;
-    margin-top: 80px;
-    line-height: 0.9;
+    letter-spacing: clamp(-6px, -1vw, -2px);
+    line-height: 0.95;
+  
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
+  
   
   /* ✅ SUBTEXT */
   .mars-sub {
@@ -368,9 +374,52 @@ footer {
   }
   
   /* ✅ FLIP */
-  .flip-section {
-    text-align: center;
-  }
+ /* ================================
+   FLIP SHOWCASE — 3D PROJECTION LAYER
+================================ */
+
+/* Energy section stays behind */
+.energy-section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Flip showcase floats above energy section */
+.flip-showcase {
+  position: relative;
+  z-index: 5;
+
+  /* Pull it visually into the energy section */
+  margin-bottom: -220px;
+
+  /* 3D projection feel */
+  transform-style: preserve-3d;
+  perspective: 1200px;
+}
+
+/* Enhance depth of flip cards */
+.flip-card {
+  transform: translateZ(80px);
+}
+
+/* Optional soft shadow for projection realism */
+.flip-showcase::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 80px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0,0,0,0.6),
+    transparent 70%
+  );
+  filter: blur(25px);
+  z-index: -1;
+}
+
   
   .container {
     display: flex;
@@ -496,70 +545,95 @@ footer {
     justify-content: space-between;
   }
   
+ /* =========================
+   EQUIPMENT TABS (SAFE)
+========================= */
+
+.equipment-tabs-wrapper {
+  width: 100%;
+  /* overflow-x: hidden;  */
+  margin-top: 40px;
+  margin-left: 20px;
+}
+
+.equipment-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap; /* 🔥 critical fix */
+}
+
+/* TAB BASE */
+.equipment-tabs span {
+  padding: 12px 22px;
+  border-radius: 40px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  color: #aaa;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+/* LIGHT SWEEP */
+.equipment-tabs span::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,170,60,0.35),
+    transparent
+  );
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+}
+
+/* ACTIVE TAB */
+.equipment-tabs span.active {
+  color: #000;
+  background: linear-gradient(135deg, #ff7a18, #ffb347);
+  border: none;
+  box-shadow:
+    0 0 25px rgba(255,140,40,0.6),
+    0 0 60px rgba(255,120,24,0.35);
+}
+
+/* ACTIVE LIGHT SWEEP */
+.equipment-tabs span.active::before {
+  transform: translateX(120%);
+}
+
+/* HOVER */
+.equipment-tabs span:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 35px rgba(255,140,40,0.45);
+}
+
+/* =========================
+   MOBILE TUNING
+========================= */
+@media (max-width: 768px) {
   .equipment-tabs {
-    display: flex;
-    gap: 28px;
-    margin-top: 40px;
-    margin-left: 80px;
-    position: relative;
-    z-index: 9999;
-    width: 150%;
+    gap: 16px;
+    
   }
-  
+
   .equipment-tabs span {
-    padding: 12px 22px;
-    border-radius: 40px;
-    border: 1px solid rgba(255,255,255,0.25);
-    color: #aaa;
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(10px);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s ease;
+    font-size: 11px;
+    padding: 10px 18px;
   }
-  
-  /* ✅ FESTIVAL LIGHT SWEEP */
-  .equipment-tabs span::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -120%;
-    width: 120%;
-    height: 100%;
-    background: linear-gradient(
-      120deg,
-      transparent,
-      rgba(255,170,60,0.4),
-      transparent
-    );
-    transition: 0.6s;
-  }
-  
-  /* ✅ ACTIVE TAB */
-  .equipment-tabs span.active {
-    color: #000;
-    background: linear-gradient(135deg, #ff7a18, #ffb347);
-    box-shadow:
-      0 0 25px rgba(255,140,40,0.6),
-      0 0 60px rgba(255,120,24,0.35);
-    border: none;
-  }
-  
-  /* ✅ ACTIVE LIGHT SWEEP */
-  .equipment-tabs span.active::before {
-    left: 120%;
-  }
-  
-  /* ✅ HOVER POP */
-  .equipment-tabs span:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 35px rgba(255,140,40,0.45);
-  }
-  
+}
+
 
   .process-section {
     padding: 100px 8%;
@@ -687,7 +761,7 @@ footer {
         flex-wrap: wrap;
         gap: 23px;
         justify-content: center;
-        margin-left: -78px;
+        margin-left: -24px;
       }
   }
   
@@ -794,7 +868,7 @@ footer {
   
     .mars-planet {
       width: 540px;
-      left: -232px;
+      left: -332px;
       bottom: -377px;
     }
   
@@ -803,7 +877,7 @@ footer {
       bottom: 60px;
       width: 150px;
       font-size: 10px;
-      padding: 14px;
+      padding: 10px;
     }
   
     /* ✅ HERO VIDEO MOBILE */
@@ -879,10 +953,10 @@ footer {
   .mars-sub-slider {
     position: relative;
     height: 55px;   /* bigger height for bigger text */
-    overflow: hidden;
+    /* overflow: hidden; */
     font-size: 20px;   /* bigger text */
     font-weight: 600;
-    line-height: 1.4;
+    line-height: 2;
     margin-top: 40px;
     margin-left: 25%;
   }
@@ -926,3 +1000,533 @@ footer {
     transform: rotateX(0deg) translateZ(0px);
   }
   
+
+
+
+  .energy-section {
+    position: relative;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    color: #fff;
+    z-index: 1;
+  }
+  
+  .energy-title {
+    position: absolute;
+    bottom: 8%;
+    font-size: 20px;
+    letter-spacing: 2px;
+    opacity: 0.7;
+  }
+  
+  /* Futuristic Grid */
+  .energy-grid {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(255,120,24,0.05) 0,
+      rgba(255,120,24,0.05) 1px,
+      transparent 1px,
+      transparent 60px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,120,24,0.05) 0,
+      rgba(255,120,24,0.05) 1px,
+      transparent 1px,
+      transparent 60px
+    );
+    animation: gridMove 18s linear infinite;
+  }
+  
+  @keyframes gridMove {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-260px); }
+  }
+  
+  /* Hologram Core */
+  .energy-core {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ff7a18, #ff4500 60%, transparent 70%);
+    filter: drop-shadow(0 0 45px rgba(255,120,24,0.8));
+    animation: corePulse 3s infinite ease-in-out;
+    position: relative;
+  }
+  
+  @keyframes corePulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 25px rgba(255,120,24,.7)); }
+    50%      { transform: scale(1.2); filter: drop-shadow(0 0 70px rgba(255,120,24,1)); }
+  }
+  
+  /* Inner Pulse Ring */
+  .energy-core .pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(255,120,24,0.6);
+    animation: pulseRing 2.5s infinite ease-out;
+  }
+  
+  @keyframes pulseRing {
+    0%   { transform: scale(0.6); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+  }
+  
+
+
+  /* ---------------------test---------- */
+  .flip-showcase {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    background: transparent;
+    z-index: 5;
+  }
+  
+  .flip-card {
+    width: 200px;
+    height: 200px;
+    perspective: 1000px;
+  }
+  
+  .flip-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .flip-card:hover .flip-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-front, .flip-back {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 20px;
+    backface-visibility: hidden;
+  }
+  
+  .flip-front {
+    background: linear-gradient(135deg, #ff7a18, #ffb347);
+    color: #000;
+  }
+  
+  .flip-back {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(12px);
+    transform: rotateY(180deg);
+  }
+  
+
+  /* ===============================
+   CLIENTS SCROLL SECTION
+================================ */
+.clients-section {
+  position: relative;
+  height: 150vh; /* gives scroll length */
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.clients-title {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 60px;
+  letter-spacing: 2px;
+  opacity: 0.85;
+}
+
+/* Pin container */
+.clients-pin {
+  position: relative;
+  height: 100px;
+  overflow: hidden;
+
+}
+
+/* Horizontal track */
+.clients-track {
+  display: flex;
+  gap: 80px;
+  white-space: nowrap;
+  align-items: center;
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  will-change: transform;
+}
+
+/* Individual names */
+.client {
+  color: transparent;
+  background: linear-gradient(135deg, #ff7a18, #ffb347);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+
+
+/* ===============================
+   TEAM PARALLELOGRAM EFFECT
+================================ */
+
+.team-scroll-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  margin-top: -80px;
+}
+
+.team-scroll-section .energy-grid,
+.team-scroll-section .energy-core {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.team-title {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  font-size: 36px;
+  letter-spacing: 3px;
+  margin-bottom: 50px;
+}
+
+/* Pin area */
+.team-pin {
+  position: relative;
+  height: 300px;
+  z-index: 3;
+}
+
+/* Horizontal track */
+.team-track {
+  display: flex;
+  gap: 90px;
+  align-items: center;
+  transform: translateX(100vw);
+  will-change: transform;
+}
+
+/* 🔥 PARALLELOGRAM CARD */
+.team-card {
+  width: 220px;
+  height: 300px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: skewX(-12deg) rotateY(-10deg);
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.25);
+
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.6),
+    inset 0 0 40px rgba(255,140,40,0.2);
+}
+
+/* Image inside */
+.team-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: skewX(12deg) scale(1.15);
+}
+
+/* Name */
+.team-card span {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%) skewX(12deg);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  background: linear-gradient(135deg, #ff7a18, #ffb347);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hover pop */
+.team-card:hover {
+  transform: skewX(-12deg) rotateY(0deg) translateY(-12px);
+  box-shadow:
+    0 40px 80px rgba(255,140,40,0.6);
+}
+
+/* Mobile */
+/* =========================
+   MOBILE FIX — TEAM SCROLL
+========================= */
+@media (max-width: 768px) {
+
+  .team-scroll-section {
+    height: auto;
+    padding: 80px 0 60px;
+    margin-top: 0;
+    overflow-x: hidden;
+  }
+
+  .team-title {
+    font-size: 26px;
+    margin-bottom: 30px;
+  }
+
+  /* Pin area becomes flexible */
+  .team-pin {
+    height: auto;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 20px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Horizontal scroll track */
+  .team-track {
+    gap: 32px; /* 🔥 reduced gap */
+    padding: 0 20px;
+    transform: translateX(0); /* 🔥 critical */
+  }
+
+  /* Card resize */
+  .team-card {
+    width: 180px;
+    height: 240px;
+    transform: skewX(-10deg) rotateY(0deg);
+  }
+
+  .team-card img {
+    transform: skewX(10deg) scale(1.1);
+  }
+
+  .team-card span {
+    font-size: px;
+  }
+}
+
+
+
+
+
+
+/* =========================
+   WHATSAPP FLOATING BUTTON
+========================= */
+.whatsapp-float {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 58px;
+  height: 58px;
+  background: linear-gradient(135deg, #25D366, #1ebe5d);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* 🔥 above everything */
+  box-shadow:
+    0 0 25px rgba(37, 211, 102, 0.7),
+    0 8px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.whatsapp-float svg {
+  width: 30px;
+  height: 30px;
+}
+
+/* Hover effect */
+.whatsapp-float:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow:
+    0 0 35px rgba(37, 211, 102, 0.9),
+    0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Mobile tuning */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    width: 52px;
+    height: 52px;
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .whatsapp-float svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+
+
+
+
+
+
+
+/* ===============================
+   CINEMATIC CONTACT FORM
+================================ */
+
+.contact-cinematic {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+
+/* Glass card */
+.contact-card {
+  width: 100%;
+  max-width: 520px;
+  padding: 42px 38px;
+
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  box-shadow:
+    0 40px 80px rgba(0, 0, 0, 0.6),
+    inset 0 0 40px rgba(255, 140, 40, 0.08);
+
+  transform-style: preserve-3d;
+}
+
+/* Title */
+.contact-title {
+  font-size: 32px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 10px;
+
+  background: linear-gradient(135deg, #ff7a18, #ffb347);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtitle */
+.contact-sub {
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.75;
+  margin-bottom: 34px;
+  line-height: 1.6;
+}
+
+/* Form fields */
+.field {
+  position: relative;
+  margin-bottom: 26px;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 14px 14px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+}
+
+.field textarea {
+  resize: none;
+}
+
+/* Floating label */
+.field label {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #aaa;
+  pointer-events: none;
+  transition: 0.3s ease;
+  background: transparent;
+}
+
+/* Focus / filled state */
+.field input:focus + label,
+.field textarea:focus + label,
+.field input:not(:placeholder-shown) + label,
+.field textarea:not(:placeholder-shown) + label {
+  top: -8px;
+  font-size: 11px;
+  color: #ffb347;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 0 6px;
+  border-radius: 6px;
+}
+
+/* Glow on focus */
+.field input:focus,
+.field textarea:focus {
+  border-color: rgba(255, 140, 40, 0.8);
+  box-shadow: 0 0 18px rgba(255, 140, 40, 0.45);
+}
+
+/* Submit button */
+.contact-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  background: linear-gradient(135deg, #ff7a18, #ffb347);
+  color: #000;
+
+  box-shadow: 0 0 30px rgba(255, 140, 40, 0.6);
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.contact-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 45px rgba(255, 140, 40, 0.85);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .contact-card {
+    padding: 34px 26px;
+  }
+
+  .contact-title {
+    font-size: 26px;
+  }
+}

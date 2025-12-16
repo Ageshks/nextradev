@@ -3,6 +3,10 @@ function sendMessage(event) {
     event.preventDefault();
     alert("Thank you! Your message has been received.");
   }
+  (function () {
+    emailjs.init("LTQguKvjAcfd2vInW");
+  })();
+  
   
   /* ✅ GSAP + ANIMATIONS INIT */
   window.addEventListener("load", () => {
@@ -275,4 +279,184 @@ flipText(); // show first
 setInterval(flipText, 3200); // flip every 3.2s
 
 
+gsap.registerPlugin(ScrollTrigger);
+
+const track = document.querySelector(".clients-track");
+
+if (track) {
+  const travelDistance = track.scrollWidth / 2; // 🔥 stop at center moment
+
+  gsap.fromTo(
+    track,
+    {
+      x: () => window.innerWidth   // start fully offscreen right
+    },
+    {
+      x: () => -travelDistance,    // 🔥 stop when centered
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".clients-section",
+        start: "top top",
+        end: () => `+=${travelDistance}`, // 🔥 SHORT pin
+        scrub: true,
+        pin: true,
+        pinSpacing: false,          // 🔥 NO GAP AFTER
+        anticipatePin: 1
+      }
+    }
+  );
+}
+
+
+
+
+/* ===============================
+   TEAM SECTION — PIN + LEFT SLIDE
+================================ */
+
+gsap.registerPlugin(ScrollTrigger);
+
+const teamTrack = document.querySelector(".team-track");
+const teamSection = document.querySelector(".team-scroll-section");
+
+if (teamTrack && teamSection) {
+  gsap.fromTo(
+    teamTrack,
+    {
+      x: "-120vw" // 🔥 start fully from LEFT
+    },
+    {
+      x: "0vw",   // 🔥 reach CENTER
+      ease: "none",
+      scrollTrigger: {
+        trigger: teamSection,
+        start: "top center",
+        end: "+=1200",          // controls scroll duration
+        scrub: true,
+        pin: true,              // 🔥 PAGE FREEZES HERE
+        anticipatePin: 1
+      }
+    }
+  );
+}
+
+
+/* =========================================
+   CONTACT PARALLAX FLIP AFTER TEAM SECTION
+========================================= */
+
+window.addEventListener("load", () => {
+  const contact = document.querySelector(".contact");
+  const teamSection = document.querySelector(".team-section");
+
+  if (!contact || !teamSection) return;
+
+  // Set initial hidden state
+  contact.classList.add("parallax-hidden");
+
+  gsap.to(contact, {
+    scrollTrigger: {
+      trigger: teamSection,
+      start: "bottom center",   // when team finishes
+      end: "bottom top",
+      scrub: true,
+    },
+    opacity: 1,
+    transform:
+      "perspective(1200px) rotateX(0deg) translateY(0)",
+    ease: "power3.out"
+  });
+});
+
+
+/* ============================
+   CONTACT FORM – INIT
+============================ */
+
+function sendMessage(event) {
+  event.preventDefault();
+
+  const form = event.target;
+  const name = form.querySelector('input[type="text"]').value.trim();
+  const email = form.querySelector('input[type="email"]').value.trim();
+  const message = form.querySelector('textarea').value.trim();
+
+  if (!name || !email || !message) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  /* 🔹 If EmailJS is connected, use this */
   
+  emailjs.send(
+    "service_958ueih",
+    "template_00g3lry",
+    {
+      from_name: name,
+      from_email: email,
+      message: message
+    }
+  ).then(
+    () => {
+      showSuccess();
+      form.reset();
+      resetFields();
+    },
+    (error) => {
+      alert("Message failed. Try again.");
+      console.error(error);
+    }
+  );
+  
+
+  /* 🔹 TEMP fallback (remove when EmailJS is live) */
+  showSuccess();
+  form.reset();
+  resetFields();
+}
+
+/* ============================
+   FLOATING LABEL HANDLER
+============================ */
+
+document.querySelectorAll(".field input, .field textarea").forEach(field => {
+  field.addEventListener("focus", () => {
+    field.parentElement.classList.add("active");
+  });
+
+  field.addEventListener("blur", () => {
+    if (!field.value) {
+      field.parentElement.classList.remove("active");
+    }
+  });
+});
+
+function resetFields() {
+  document.querySelectorAll(".field").forEach(f => {
+    f.classList.remove("active");
+  });
+}
+
+/* ============================
+   SUCCESS FEEDBACK
+============================ */
+
+function showSuccess() {
+  const btn = document.querySelector(".contact-btn");
+  const originalText = btn.innerText;
+
+  btn.innerText = "Message Sent ✓";
+  btn.style.background =
+    "linear-gradient(135deg, #00ff9c, #00c97b)";
+  btn.style.color = "#000";
+
+  setTimeout(() => {
+    btn.innerText = originalText;
+    btn.style.background = "";
+    btn.style.color = "";
+  }, 2800);
+}
+
+
+
+
