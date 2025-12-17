@@ -1530,3 +1530,26 @@ footer {
     font-size: 26px;
   }
 }
+
+
+/* ===============================
+   FIX FOR 13–14 INCH SCREENS
+=============================== */
+@media (min-width: 1280px) and (max-width: 1600px) {
+  .mars-title {
+    font-size: clamp(56px, 10vw, 160px); /* 🔥 controlled */
+    letter-spacing: clamp(-4px, -0.6vw, -2px);
+    line-height: 0.96;
+  }
+}
+/* =====================================
+   FIX FOR 850px – 1270px VIEWPORTS
+===================================== */
+@media (min-width: 850px) and (max-width: 1270px) {
+  .mars-title {
+    font-size: clamp(52px, 8.5vw, 120px); /* controlled scale */
+    letter-spacing: -2px;               /* lock spacing */
+    line-height: 1;                     /* prevent drop */
+    white-space: nowrap;                /* 🔥 critical */
+  }
+}
