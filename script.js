@@ -379,21 +379,21 @@ function sendMessage(event) {
   const form = event.target;
   const name = form.querySelector('input[type="text"]').value.trim();
   const email = form.querySelector('input[type="email"]').value.trim();
+  const phone = form.querySelector('input[type="tel"]').value.trim();
   const message = form.querySelector('textarea').value.trim();
 
-  if (!name || !email || !message) {
+  if (!name || !email || !phone || !message) {
     alert("Please fill all fields");
     return;
   }
 
-  /* 🔹 If EmailJS is connected, use this */
-  
   emailjs.send(
     "service_958ueih",
     "template_00g3lry",
     {
       from_name: name,
       from_email: email,
+      phone: phone,
       message: message
     }
   ).then(
@@ -407,13 +407,8 @@ function sendMessage(event) {
       console.error(error);
     }
   );
-  
-
-  /* 🔹 TEMP fallback (remove when EmailJS is live) */
-  showSuccess();
-  form.reset();
-  resetFields();
 }
+
 
 /* ============================
    FLOATING LABEL HANDLER

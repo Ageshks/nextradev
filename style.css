@@ -1176,8 +1176,7 @@ footer {
 /* Individual names */
 .client {
   color: transparent;
-  background: linear-gradient(135deg, #ff7a18, #ffb347);
-  -webkit-background-clip: text;
+  color: rgba(255, 255, 255, 0.65);  -webkit-background-clip: text;
   background-clip: text;
 }
 
