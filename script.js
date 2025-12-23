@@ -454,4 +454,24 @@ function showSuccess() {
 
 
 
+/* =========================
+   PAGE LOADER CONTROL
+========================= */
+
+document.documentElement.style.overflow = "hidden";
+
+window.addEventListener("load", () => {
+  const loader = document.getElementById("page-loader");
+
+  setTimeout(() => {
+    loader.classList.add("hidden");
+    document.documentElement.style.overflow = "";
+
+    setTimeout(() => {
+      loader.remove();
+    }, 700);
+  }, 5000);
+});
+
+
 

@@ -1552,3 +1552,88 @@ footer {
     white-space: nowrap;                /* 🔥 critical */
   }
 }
+
+
+
+#page-loader {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #000, #050505);
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#page-loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+.loader-stage {
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+/* From Uiverse.io by Vosoone */ 
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.loader {
+  width: 100%;
+}
+
+.trace-bg {
+  stroke: #252525;
+  stroke-width: 1.8;
+  fill: none;
+}
+
+.trace-flow {
+  stroke-width: 1.8;
+  fill: none;
+  stroke-dasharray: 40 400;
+  stroke-dashoffset: 438;
+  filter: drop-shadow(0 0 6px currentColor);
+  animation: flow 3s cubic-bezier(0.5, 0, 0.9, 1) infinite;
+}
+
+.blue2 {
+  stroke: #399fff;
+  color: #399fff;
+}
+.blue {
+  stroke: #399fff;
+  color: #399fff;
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Čip */
+.chip-body {
+  rx: 20;
+  ry: 20;
+}
+
+/* Text uvnitř čipu */
+.chip-text {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Piny */
+.chip-pin {
+  stroke: #444;
+  stroke-width: 0.9;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.6));
+}
